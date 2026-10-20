@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#f6f3ed">
+  <meta name="description" content="兩個人的選店簿：55間餐廳、生日優惠、CUBE回饋與雙人共同選擇。">
+  <title>十月慢食選店簿｜星星菟菟 × 星星狗狗</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='50'%3E%E2%AD%90%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="config.js"></script>
+  <script defer src="venues.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="top-inner">
+      <a class="logo" href="#top"><span class="logo-mark">✳</span><span>十月慢食 <small>Birthday Dining</small></span></a>
+      <div class="top-actions"><span id="sync-indicator" class="status mini" title="同步狀態">本機儲存</span><button id="open-share" class="small-btn" type="button">↗ 分享選店</button></div>
+    </div>
+  </header>
+  <main id="top">
+    <section class="hero wrap">
+      <p class="eyebrow">2026 · OCT — NOV <span class="bullet">✦</span> A TABLE FOR TWO</p>
+      <div class="hero-row"><div><h1>今年生日，<br><em>吃點真正喜歡的。</em></h1><p class="sub">兩個人的餐桌提案｜料理、風味、生日優惠與理性選擇。</p></div><div class="avatar-pair" aria-hidden="true"><span class="av rabbit">🐰<sup>✦</sup></span><span class="av dog">🐶<sup>✦</sup></span></div></div>
+      <div class="summary-strip"><span><b id="count-all">55</b> 間候選</span><span><b id="count-result">55</b> 間符合</span><span><b id="count-both">0</b> 間兩人都想吃</span><button id="goto-both" type="button" class="link-btn">看共同清單 →</button></div>
+    </section>
+    <section class="planner wrap">
+      <div class="dates"><span><strong>10/21</strong> 臺虎精釀</span><span><strong>10/22</strong> 海洋館</span><span><strong>10/23</strong> 鈴蘭通前夜祭</span><span><strong>10/26</strong> 🎂 生日</span><span><strong>11/3–4</strong> 台北出差</span></div>
+      <div class="stamps"><strong>生日踩點吉章</strong><span>進度手動記錄（不會自動判定）</span><div id="stamps-buttons"><button type="button" data-stamp="0">0/3</button><button type="button" data-stamp="1">1/3</button><button type="button" data-stamp="2">2/3</button><button type="button" data-stamp="3">3/3</button></div></div><div class="mini-note"><strong>回饋提醒</strong><span>「慶生月10%」為指定店家刷卡回饋，<b>非現場打9折</b>。200點踩點吉章需在10/31前完成三個不同指定類別的單筆500元消費；生日券通常須有資格並提前領取。</span><a href="https://www.cathay-cube.com.tw/cathaybk/personal/event/overview/credit-card/dining/202610/cube_birthday_2026Q4" rel="noopener noreferrer" target="_blank">官方說明↗</a></div>
+    </section>
+    <section class="filters-zone wrap" aria-label="餐廳篩選工具">
+      <div class="search-row"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="搜尋餐廳、料理、牛舌、甜點、酒款…" autocomplete="off"></label><button id="reset" class="small-btn reset" type="button">清除條件</button></div>
+      <div class="filters-top"><h2>挑選條件 <span>可複選</span></h2><span id="active-count" class="active-count">0 個篩選</span></div>
+      <div class="filter-scroller" id="base-filters"></div>
+      <div class="tag-label">料理標籤 <span>多選需同時符合</span></div>
+      <div class="filter-scroller tag-row" id="tag-filters"></div>
+      <div class="sort-row"><div id="active-preview" class="active-preview">目前顯示全部店家</div><label>排序 <select id="sort"><option value="quality">品質證據優先</option><option value="distance">離台中車站近</option><option value="price">價格低到高</option><option value="discount">回饋高到低</option></select></label></div>
+    </section>
+    <section class="results wrap">
+      <div class="result-heading"><div><p class="eyebrow">OUR SHORTLIST</p><h2>慢慢挑，喜歡再收藏。</h2></div><div class="result-actions"><button id="add-venue" class="outline" type="button">＋ 新增店家</button><button id="compare" class="outline" type="button">比較已勾選 <b id="vote-count">0</b> 間</button></div></div>
+      <div class="cards" id="cards" aria-live="polite"></div>
+      <div class="no-result" id="empty" hidden><strong>沒有符合的店家</strong><p>可以取消一兩個標籤，或清除條件重新挑選。</p><button id="empty-reset" class="primary" type="button">顯示所有餐廳</button></div>
+    </section>
+  </main>
+  <footer class="wrap footer"><span>十月慢食選店簿 ✦ 星星菟菟 × 星星狗狗</span><span>圖片為料理插畫示意、不是店家實拍；價位與距離為約略估算，折扣請以官方公告為準。</span></footer>
+  <dialog id="join-dialog" class="modal join" aria-labelledby="join-title">
+    <div class="modal-inner"><p class="eyebrow">A TABLE FOR TWO ✦</p><h2 id="join-title">這次，想當哪一位？</h2><p class="help">兩支手機選不同角色，用同一個共享房間一起勾選。</p>
+      <div class="identity-grid"><button type="button" class="identity" data-role="rabbit"><span class="bigemoji">🐰<i>✦</i></span><strong>星星菟菟</strong><small>第一位選餐者</small></button><button type="button" class="identity" data-role="dog"><span class="bigemoji">🐶<i>✦</i></span><strong>星星狗狗</strong><small>第二位選餐者</small></button></div>
+      <label class="form-label" for="join-code">共享房間（選填）</label><input id="join-code" class="field" placeholder="若收到夥伴連結會自動填入">
+      <button id="join-start" class="primary wide" type="button" disabled>建立／加入兩人的餐桌</button><p id="join-alert" class="error" hidden></p><p class="help muted">這是非敏感生活選餐工具：分享連結請只給夥伴，也不要輸入私密個資。</p>
+      <p class="help" id="local-only-note">尚未設定雲端資料庫時只能在本機儲存，兩支手機不會同步。</p>
+    </div>
+  </dialog>
+  <dialog id="detail-dialog" class="modal detail"><div class="modal-inner"><button id="detail-close" class="close" aria-label="關閉" type="button">×</button><div id="detail"></div></div></dialog>
+  <dialog id="share-dialog" class="modal share"><div class="modal-inner"><button id="share-close" class="close" aria-label="關閉" type="button">×</button><p class="eyebrow">SHARE THE TABLE</p><h2>邀請一起選餐廳</h2><p class="help">將房間網址傳給夥伴，由對方選另一個星星角色。</p><div id="room-code" class="room-code"></div><button id="copy-link" class="primary wide" type="button">複製共用網址</button><button id="change-role" class="outline wide" type="button">切換星星菟菟／星星狗狗</button><button id="export-list" class="outline wide" type="button">匯出兩人喜好 JSON 備份</button><p id="share-status" class="help"></p></div></dialog>
+  <dialog id="add-dialog" class="modal add"><div class="modal-inner"><button class="close" id="add-close" type="button">×</button><p class="eyebrow">EXPAND YOUR LIST</p><h2>加一家喜歡的店</h2><p class="help">自行新增的餐廳會標示「未核實」，避免與正式優惠資料混淆。</p><label class="form-label">店名</label><input id="new-name" class="field" maxlength="80" placeholder="例如：收藏的餐酒館"><label class="form-label">縣市</label><select id="new-city" class="field"><option value="台中">台中</option><option value="台北">台北</option><option value="其他">其他</option></select><label class="form-label">類型</label><input id="new-kind" class="field" placeholder="燒肉、咖啡、甜點…"><label class="form-label">想吃什麼</label><input id="new-main" class="field" placeholder="牛舌、手沖、和牛…"><label class="form-label">大約每人預算（NT$）</label><input id="new-price" class="field" type="number" min="0" max="100000" value="800"><button class="primary wide" id="new-save" type="button">加入選店簿</button></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body></html>
