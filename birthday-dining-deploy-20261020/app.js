@@ -259,11 +259,11 @@
     $('#count-all').textContent=all.length;
     $('#count-result').textContent=list.length;
     $('#count-both').textContent=all.filter(v=>state.votes[v.id]?.rabbit&&state.votes[v.id]?.dog).length;
-    $('#vote-count').textContent=all.filter(v=>state.votes[v.id]?.rabbit || state.votes[v.id]?.dog).length;
+    const voteCount=all.filter(v=>state.votes[v.id]?.rabbit || state.votes[v.id]?.dog).length;
     $('#stamps-buttons').querySelectorAll('[data-stamp]').forEach(b=>b.classList.toggle('selected',Number(b.dataset.stamp)===state.stamps));
     $('#cards').innerHTML=list.map(cardHtml).join('');
     $('#empty').hidden=list.length!==0;
-    $('#compare').textContent=state.comparing?'取消比較':'比較已勾選 ('+$('#vote-count').textContent+')';
+    $('#compare').textContent=state.comparing?'取消比較':'比較已勾選 ('+voteCount+')';
   }
   function chooseChip(group,value){
     const f=state.filters;
